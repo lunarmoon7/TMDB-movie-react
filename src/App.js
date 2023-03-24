@@ -11,23 +11,22 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
 
-  // const getMovies = async () => {
-  //   const json = await (await fetch(`${URL}popular?api_key=${API_KEY}`)).json();
-
-  //   setMovies(json);
-  //   setLoading(false);
-  //   console.log(json);
-  // };
+  const getData = (callType) => {
+    callType.then((data) => {
+      setMovies(data);
+      console.log(data);
+    });
+  };
 
   useEffect(() => {
-    const json = TMDB.getPopularMovies();
-    setMovies(json);
-    console.log(json);
+    getData(TMDB.getPopularMovies());
   }, []);
 
   return (
     <ChakraProvider theme={theme}>
-      <Container textAlign='center'fontSize={50}>TMDB</Container>
+      <Container textAlign="center" fontSize={50}>
+        TMDB
+      </Container>
       <ThemeToggleButton />
       {/* <Flex
         boxSize={40}
