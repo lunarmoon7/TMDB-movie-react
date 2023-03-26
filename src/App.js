@@ -36,24 +36,22 @@ const App = () => {
     <ChakraProvider theme={theme}>
       <Navbar />
       <Container maxW="container.md" pt={14}>
-        <Flex color="black" textAlign="center" overflowX="auto">
-          <MovieList>
-            {movies.map((movie) => (
-              <MovieItem
-                key={movie.id}
-                adult={movie.adult}
-                id={movie.id}
-                title={movie.title}
-                overview={movie.overview}
-                release_date={movie.release_date}
-                vote_average={movie.vote_average}
-                vote_count={movie.vote_count}
-                popularity={movie.popularity}
-                thumbnail={movie.poster_path}
-              />
-            ))}
-          </MovieList>
-        </Flex>
+        <MovieList>
+          {movies.map((movie) => (
+            <MovieItem
+              key={movie.id}
+              adult={movie.adult}
+              id={movie.id}
+              title={movie.title}
+              overview={movie.overview}
+              release_date={movie.release_date}
+              vote_average={movie.vote_average}
+              vote_count={movie.vote_count}
+              popularity={movie.popularity}
+              thumbnail={movie.poster_path}
+            />
+          ))}
+        </MovieList>
       </Container>
     </ChakraProvider>
   );
