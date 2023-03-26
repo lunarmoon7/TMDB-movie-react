@@ -1,4 +1,4 @@
-import { Flex, Box, Text, LinkBox, LinkOverlay, Image } from "@chakra-ui/react";
+import { Center, Flex, Box, Text, LinkBox, LinkOverlay, Image } from "@chakra-ui/react";
 import { Global } from "@emotion/react";
 import TMDB from "../api/apicall";
 import config from "../api/apikey";
@@ -16,19 +16,15 @@ export const MovieItem = ({
   popularity,
   thumbnail,
 }) => (
-  <Box minW="150px" textAlign="center" ml={3}>
-    {/* <Flex direction="row" w="100%" h={7} mb={3} alignItems="center" justifyContent="center"> */}
-      {/* <Box>{release_date}</Box> */}
-    {/* </Flex> */}
+  <Box minW="150px" textAlign="center" mr={3}>
     <LinkBox cursor="pointer">
       <Image
         w="100%"
-        h="300px"
         objectFit="contain"
         src={`${TMDB_POSTER_URL}${thumbnail}`}
         alt={title}
+        borderRadius='lg'
       />
     </LinkBox>
-    {/* <Text>{overview}</Text> */}
   </Box>
 );
