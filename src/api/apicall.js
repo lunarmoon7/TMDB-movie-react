@@ -3,6 +3,7 @@ import config from "./apikey";
 const TMDB_API_KEY = config.TMDB_API_KEY;
 const TMDB_BASE_URL = config.TMDB_BASE_URL;
 const TMDB_POSTER_URL = config.TMDB_POSTER_URL;
+const TMDB_SEARCH_URL = config.TMDB_SEARCH_URL;
 
 const TMDB = {
   getPopularMovies: async () => {
@@ -10,24 +11,7 @@ const TMDB = {
       `${TMDB_BASE_URL}/popular?api_key=${TMDB_API_KEY}`
     );
     const popularMovies = await resp.json();
-    // popularMovies.results = popularMovies.results.map((data) => ({
-    //   ...data,
-    //   adult: data.adult,
-    //   backdrop_path: data.backdrop_path,
-    //   genre_ids: data.genre_ids,
-    //   id: data.id,
-    //   original_language: data.original_language,
-    //   original_title: data.original_title,
-    //   overview: data.overview,
-    //   popularity: data.popularity,
-    //   poster_path: data.poster_path,
-    //   release_date: data.release_date,
-    //   title: data.title,
-    //   video: data.video,
-    //   vote_average: data.vote_average,
-    //   vote_count: data.vote_count,
-    // }));
-
+    
     return popularMovies.results;
   },
 
@@ -80,7 +64,7 @@ const TMDB = {
     const resp = await fetch(
       `${TMDB_BASE_URL}/top_rated?api_key=${TMDB_API_KEY}`
     );
-    const topRated = resp.json();
+    const topRated = await resp.json();
     return topRated;
   },
 
@@ -88,16 +72,15 @@ const TMDB = {
     const resp = await fetch(
       `${TMDB_BASE_URL}/now_playing?api_key=${TMDB_API_KEY}`
     );
-    const nowPlaying = resp.json();
-
-    return nowPlaying;
+    const nowPlaying = await resp.json();
+    return nowPlaying.results;
   },
 
   getLatestMovies: async () => {
     const resp = await fetch(`${TMDB_BASE_URL}/latest?api_key=${TMDB_API_KEY}`);
     const latestMovies = resp.json();
 
-    return latestMovies;
+    return latestMovies.results;
   },
 
   getTranslations: async (movie_id) => {
@@ -134,6 +117,15 @@ const TMDB = {
     const credits = resp.json();
 
     return credits;
+  },
+
+  getSearchMovies: async (keyword) => {
+    const resp = await fetch(
+      `${TMDB_SEARCH_URL}/movie?api_key=${TMDB_API_KEY}&query=${keyword}`
+    );
+    const searches = await resp.json();
+
+    return searches.results;
   },
 };
 
