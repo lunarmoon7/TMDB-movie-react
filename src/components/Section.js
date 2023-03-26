@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
-import { chakra, shouldForwardProp } from "@chakra-ui/react";
+import theme from "../libs/theme";
+
+import {
+  chakra,
+  shouldForwardProp,
+  Heading,
+  Container,
+} from "@chakra-ui/react";
 
 const StyledDiv = chakra(motion.div, {
   shouldForwardProp: (prop) => {
@@ -7,7 +14,7 @@ const StyledDiv = chakra(motion.div, {
   },
 });
 
-const Section = ({ children, delay = 0 , styles = {}}) => (
+const Section = ({ children, delay = 0, styles = {} , heading}) => (
   <StyledDiv
     initial={{ y: 10, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
@@ -15,8 +22,13 @@ const Section = ({ children, delay = 0 , styles = {}}) => (
     mb={6}
     style={styles}
   >
-    {children}
+    <Container maxW="container.lg" pt={70}>
+      <Heading as="h4" variant="page-title" mb={3} fontFamily={theme.fonts}>
+        {heading}
+      </Heading>
+      {children}
+    </Container>
   </StyledDiv>
 );
 
-export default Section
+export default Section;
