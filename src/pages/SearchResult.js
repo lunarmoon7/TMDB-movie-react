@@ -17,14 +17,6 @@ const SearchResult = (props) => {
 
   useEffect(() => {
       promiseHandler(TMDB.getSearchMovies(keyword), setRet);
-    // return () => {
-    //   TMDB.getSearchWithKeywords(keyword).then((data) => {
-    //     console.log(data);
-    //     setRet((prev) => {
-    //       return [...data];
-    //     });
-    //   });
-    // };
   }, []);
 
 //   데이터 확인용
