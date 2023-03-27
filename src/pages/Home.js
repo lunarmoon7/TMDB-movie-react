@@ -13,10 +13,10 @@ import { useEffect, useState } from "react";
 import theme from "../libs/theme";
 import ThemeToggleButton from "../components/theme-toggle-button";
 import TMDB from "../api/apicall";
-import { MovieItem } from "../components/Movieitem";
-import MovieList from "../components/MovieList";
+import { MovieItem } from "../components/item";
+import { MovieList } from "../components/item-list";
 import Navbar from "../components/navbar";
-import Section from "../components/Section";
+import { Section } from "../components/Section";
 import Searchbar from "../components/Searchbar";
 
 const Home = (props) => {
@@ -45,13 +45,10 @@ const Home = (props) => {
   useEffect(() => {
     promiseHandler(TMDB.getPopularMovies(), setPopularMovies);
     promiseHandler(TMDB.getNowPlaying(), setNowPlayingMovies);
-    console.log(nowPlaying);
-
   }, []);
   return (
     <ChakraProvider theme={theme}>
       <Navbar />
-
       <Container maxW="contianer.lg" mt={100}>
         <Container maxW="container.lg">
           <Searchbar searchHandler={searchHandler} />
