@@ -14,10 +14,12 @@ const Searchbar = (props) => {
 
   const enterHandler = (e) => {
     if (e.keyCode === 13) {
+      e.preventDefault();
       props.searchHandler(enteredKeyword, e.keyCode);
       setEnteredKeyword("");
     }
   };
+
   return (
     <Box>
       <InputGroup size="lg">
