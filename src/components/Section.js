@@ -14,7 +14,7 @@ const StyledDiv = chakra(motion.div, {
   },
 });
 
-const Section = ({ children, delay = 0, styles = {} , heading}) => (
+export const Section = ({ children, delay = 0, styles = {}, heading }) => (
   <StyledDiv
     initial={{ y: 10, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
@@ -31,4 +31,24 @@ const Section = ({ children, delay = 0, styles = {} , heading}) => (
   </StyledDiv>
 );
 
-export default Section;
+export const SearchSection = ({
+  children,
+  delay = 0,
+  styles = {},
+  heading,
+}) => (
+  <StyledDiv
+    initial={{ y: 10, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.8, delay }}
+    mb={6}
+    style={styles}
+  >
+    <Container maxW="container.lg" pt={70}>
+      <Heading as="h4" variant="page-title" mb={5} fontFamily={theme.fonts}>
+        Found {heading} movies!
+      </Heading>
+      {children}
+    </Container>
+  </StyledDiv>
+);
