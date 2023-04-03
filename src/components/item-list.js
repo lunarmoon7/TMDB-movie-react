@@ -8,7 +8,9 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { MovieItem, SearchItem } from "./item";
-import {ApiError, ImageError} from "./error";
+import { ApiError, ImageError } from "./error";
+import { Detail } from "./Detail";
+
 import theme from "../libs/theme";
 
 export const MovieList = (props) => {
@@ -51,17 +53,23 @@ export const SearchList = (props) => {
     <Box>
       {!props.searchResult && <ApiError />}
       {props.searchResult && (
-          <SimpleGrid minChildWidth="150px" spacingX="40px" spacingY="20px">
-            {props.searchResult.map((result) => (
-              <SearchItem
-                key={result.id}
-                title={result.title}
-                thumbnail={result.poster_path}
-                vote_average={result.vote_average}
-              />
-            ))}
-          </SimpleGrid>
-        )}
+        <SimpleGrid minChildWidth="150px" spacingX="40px" spacingY="20px">
+          {props.searchResult.map((result) => (
+            <SearchItem
+              key={result.id}
+              adult={result.adult}
+              id={result.id}
+              title={result.title}
+              overview={result.overview}
+              release_date={result.release_date}
+              vote_average={result.vote_average}
+              vote_count={result.vote_count}
+              popularity={result.popularity}
+              thumbnail={result.poster_path}
+            />
+          ))}
+        </SimpleGrid>
+      )}
     </Box>
   );
 };
