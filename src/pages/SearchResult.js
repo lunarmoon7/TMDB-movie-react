@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Text, ChakraProvider, Container } from "@chakra-ui/react";
-import {
-  useParams,
-  useNavigate,
-  useLocation,
-  useSearchParams,
-  setSearchParams,
-} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import TMDB from "../api/apicall";
 import { SearchSection } from "../components/Section";
 import { SearchList } from "../components/item-list";
@@ -18,7 +12,7 @@ const SearchResult = (props) => {
   const navigate = useNavigate();
   const { keyword } = useParams();
   const [searchResult, setSearchResult] = useState([]);
-  const location = useLocation();
+  // const location = useLocation();
 
   const promiseHandler = (callType, setStateType) => {
     callType.then((data) => {
@@ -45,8 +39,8 @@ const SearchResult = (props) => {
 
   // 데이터 확인용
   useEffect(() => {
-    console.log(searchResult);
-    console.log(keyword);
+    // console.log(searchResult);
+    // console.log(keyword);
   }, [searchResult]);
 
   return (
