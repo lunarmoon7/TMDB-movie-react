@@ -21,6 +21,7 @@ import Movierate from "./Movierate";
 import { ImageError } from "./error";
 import { MovieModal } from "./Modal";
 import theme from "../libs/theme";
+import { MovieDetailSection } from "./Section";
 
 const TMDB_POSTER_URL = config.TMDB_POSTER_URL;
 
@@ -34,9 +35,10 @@ export const MovieItem = ({
   vote_count,
   popularity,
   thumbnail,
+  onOpen=()=>{},
 }) => (
   // onClick={onOpen}
-  <Card position="relative" minW="150px" textAlign="center" mr={3}>
+  <Card position="relative" minW="150px" textAlign="center" mr={3} onClick={onOpen}>
     <Movierate vote_average={vote_average} />
     <CardBody p={0}>
       <LinkBox cursor="pointer" h="100%">
@@ -52,22 +54,24 @@ export const MovieItem = ({
   </Card>
 );
 
-export const SearchItem = ({
-  adult,
-  id,
-  title,
-  overview,
-  release_date,
-  vote_average,
-  vote_count,
-  popularity,
-  thumbnail,
-}) => {
+export const SearchItem = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <Box position="relative" textAlign="center" onClick={onOpen}>
+      <MovieItem
+        adult={props.adult}
+        id={props.id}
+        title={props.title}
+        overview={props.overview}
+        release_date={props.release_date}
+        vote_average={props.vote_average}
+        vote_count={props.vote_count}
+        popularity={props.popularity}
+        thumbnail={props.thumbnail}
+        onOpen={onOpen}
+      />
+      {/* <Box position="relative" textAlign="center" onClick={onOpen}>
         <Movierate vote_average={vote_average} />
         <LinkBox cursor="pointer" h="100%">
           {thumbnail && (
@@ -81,28 +85,28 @@ export const SearchItem = ({
           )}
           {thumbnail === null && <ImageError />}
         </LinkBox>
-      </Box>
+      </Box> */}
       <MovieModal
         onClose={onClose}
         isOpen={isOpen}
-        adult={adult}
-        id={id}
-        title={title}
-        overview={overview}
-        release_date={release_date}
-        vote_average={vote_average}
-        vote_count={vote_count}
-        popularity={popularity}
-        thumbnail={thumbnail}
+        adult={props.adult}
+        id={props.id}
+        title={props.title}
+        overview={props.overview}
+        release_date={props.release_date}
+        vote_average={props.vote_average}
+        vote_count={props.vote_count}
+        popularity={props.popularity}
+        thumbnail={props.thumbnail}
       />
     </>
   );
 };
 
-export const ModalItem = (props) => {
+export const ModalDetailItem = (props) => {
   return (
     <Box>
-      <Flex>
+      <Flex alignItems="center">
         <Box maxW="500px">
           <Image
             src={`${TMDB_POSTER_URL}${props.thumbnail}`}
@@ -140,9 +144,19 @@ export const ModalItem = (props) => {
               / {props.vote_count} votes
             </Box>
           </Box>
-          <Box>{props.overview}</Box>
+          <Box fontSize={"lg"}>{props.overview}</Box>
         </Box>
       </Flex>
+      <Box mt={5}>Credit Section</Box>
+      <Box>Similar Movie Section</Box>
     </Box>
   );
+};
+
+export const ModalCreditItem = (props) => {
+  return <Box></Box>;
+};
+
+export const ModalSimilarMovieItem = (props) => {
+  return <Box></Box>;
 };
