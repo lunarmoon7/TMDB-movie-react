@@ -10,14 +10,17 @@ import {
   CardBody,
   useDisclosure,
   Button,
+  HStack,
+  Heading,
+  Badge,
 } from "@chakra-ui/react";
 import { Global } from "@emotion/react";
 import TMDB from "../api/apicall";
 import config from "../api/apikey";
 import Movierate from "./Movierate";
 import { ImageError } from "./error";
-import { Detail } from "./Detail";
-import { useState } from "react";
+import { MovieModal } from "./Modal";
+import theme from "../libs/theme";
 
 const TMDB_POSTER_URL = config.TMDB_POSTER_URL;
 
@@ -60,7 +63,6 @@ export const SearchItem = ({
   popularity,
   thumbnail,
 }) => {
-  
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -80,7 +82,7 @@ export const SearchItem = ({
           {thumbnail === null && <ImageError />}
         </LinkBox>
       </Box>
-      <Detail
+      <MovieModal
         onClose={onClose}
         isOpen={isOpen}
         adult={adult}
@@ -91,7 +93,56 @@ export const SearchItem = ({
         vote_average={vote_average}
         vote_count={vote_count}
         popularity={popularity}
+        thumbnail={thumbnail}
       />
     </>
+  );
+};
+
+export const ModalItem = (props) => {
+  return (
+    <Box>
+      <Flex>
+        <Box maxW="500px">
+          <Image
+            src={`${TMDB_POSTER_URL}${props.thumbnail}`}
+            alt={props.title}
+          />
+        </Box>
+        <Box mt={5} ml={10}>
+          <Flex alignItems="baseline" justifyContent="space-between" mb={3}>
+            <Flex
+              alignItems="baseline"
+              justifyContent="space-between"
+              flexWrap="wrap"
+            >
+              <Heading mr={2} fontFamily={theme.fonts}>
+                {props.title}
+              </Heading>
+              <Box>
+                <Text mr={5}>{props.release_date}</Text>
+              </Box>
+            </Flex>
+          </Flex>
+          <Badge borderRadius="full" px="2" colorScheme="teal" mb={3}>
+            {props.adult ? "Adult" : "ALL"}
+          </Badge>
+          <Box
+            display="flex"
+            alignItems={"baseline"}
+            justifyContent="left"
+            mb={3}
+          >
+            <Badge borderRadius="full" px={2} colorScheme="cyan">
+              {props.vote_average}
+            </Badge>
+            <Box as="span" ml="1" color="gray.400" fontSize="sm">
+              / {props.vote_count} votes
+            </Box>
+          </Box>
+          <Box>{props.overview}</Box>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
