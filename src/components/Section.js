@@ -96,7 +96,7 @@ export const ModalCreditSection = ({ children, delay = 0, styles = {}, heading }
     style={styles}
   >
     <Container maxW="container.lg">
-      Modal Credit Section
+      <Heading fontFamily={theme.fonts} fontSize='3xl' mb={3}>Credits</Heading>
       {children}
     </Container>
   </StyledDiv>
