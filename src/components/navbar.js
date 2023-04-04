@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import ThemeToggleButton from "./theme-toggle-button";
-
+import theme from '../libs/theme';
 const LinkItem = ({ href, path, children }) => {
   const active = href === path;
   const inactiveColor = useColorModeValue("gray200", "whiteAlpha.900");
@@ -59,8 +59,8 @@ const Navbar = (props) => {
         justify="space-between"
       >
         <Flex align="center" mr={5}>
-          <Heading as="h1" size="lg" letterSpacing={"tighter"}>
-            TMDB
+          <Heading as="h1" size="lg" letterSpacing={"tighter"} fontFamily={theme.fonts}>
+            <Link href='/'>TMDB</Link>
           </Heading>
         </Flex>
 
