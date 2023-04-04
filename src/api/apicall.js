@@ -37,27 +37,27 @@ const TMDB = {
     const resp = await fetch(
       `${TMDB_BASE_URL}/${movie_id}/recommendations?api_key=${TMDB_API_KEY}`
     );
-    const recommendations = resp.json();
+    const recommendations = await resp.json();
 
-    return recommendations;
+    return recommendations.results;
   },
 
   getSimilarMovies: async (movie_id) => {
     const resp = await fetch(
       `${TMDB_BASE_URL}/${movie_id}/similar?api_key=${TMDB_API_KEY}`
     );
-    const similarMovies = resp.json();
+    const similarMovies = await resp.json();
 
-    return similarMovies;
+    return similarMovies.results;
   },
 
   getUpComing: async () => {
     const resp = await fetch(
       `${TMDB_BASE_URL}/upcoming?api_key=${TMDB_API_KEY}`
     );
-    const upcoming = resp.json();
+    const upcoming = await resp.json();
 
-    return upcoming;
+    return upcoming.results;
   },
 
   getTopRated: async () => {
@@ -65,7 +65,7 @@ const TMDB = {
       `${TMDB_BASE_URL}/top_rated?api_key=${TMDB_API_KEY}`
     );
     const topRated = await resp.json();
-    return topRated;
+    return topRated.results;
   },
 
   getNowPlaying: async () => {
@@ -78,7 +78,7 @@ const TMDB = {
 
   getLatestMovies: async () => {
     const resp = await fetch(`${TMDB_BASE_URL}/latest?api_key=${TMDB_API_KEY}`);
-    const latestMovies = resp.json();
+    const latestMovies = await resp.json();
 
     return latestMovies.results;
   },
@@ -87,35 +87,35 @@ const TMDB = {
     const resp = await fetch(
       `${TMDB_BASE_URL}/${movie_id}/translations?api_key=${TMDB_API_KEY}`
     );
-    const translations = resp.json();
+    const translations = await resp.json();
 
-    return translations;
+    return translations.results;
   },
 
   getReviews: async (movie_id) => {
     const resp = await fetch(
       `${TMDB_BASE_URL}/${movie_id}/reviews?api_key=${TMDB_API_KEY}`
     );
-    const reviews = resp.json();
+    const reviews = await resp.json();
 
-    return reviews;
+    return reviews.results;
   },
 
   getKeywords: async (movie_id) => {
     const resp = await fetch(
       `${TMDB_BASE_URL}/${movie_id}/keywords?api_key=${TMDB_API_KEY}`
     );
-    const keywords = resp.json();
+    const keywords = await resp.json();
 
-    return keywords;
+    return keywords.results;
   },
 
   getCredits: async (movie_id) => {
+    // get cast and crew whose popularity is greater than 15
     const resp = await fetch(
-      `${TMDB_BASE_URL}/${movie_id}/credits?api_key=${TMDB_API_KEY}`
+      `${TMDB_BASE_URL}/${movie_id}/credits?api_key=${TMDB_API_KEY}&language=en-US`
     );
-    const credits = resp.json();
-
+    const credits = await resp.json();
     return credits;
   },
 
@@ -129,98 +129,5 @@ const TMDB = {
   },
 };
 
+
 export default TMDB;
-
-// const call = {
-//     getPopularMovies: async (TMDB_BASE_URL, TMDB_API_KEY) => {
-//       const popularMovies = await (
-//         await fetch(`${TMDB_BASE_URL}/popular?TMDB_API_KEY=${TMDB_API_KEY}`)
-//       ).json();
-
-//       return popularMovies;
-//     },
-
-//     getDetails: async (TMDB_BASE_URL, TMDB_API_KEY, movie_id) => {
-//       const details = await (await fetch(`${TMDB_BASE_URL}/${movie_id}`)).json();
-
-//       return details;
-//     },
-
-//     getImages: async (TMDB_BASE_URL, TMDB_API_KEY, movie_id) => {
-//       const images = await (await fetch(`${TMDB_BASE_URL}/${movie_id}/images`)).json();
-
-//       return images;
-//     },
-
-//     getRecommendations: async (TMDB_BASE_URL, TMDB_API_KEY, movie_id) => {
-//       const recommendations = await (
-//         await fetch(`${TMDB_BASE_URL}/${movie_id}/recommendations`)
-//       ).json();
-
-//       return recommendations;
-//     },
-
-//     getSimilarMovies: async (TMDB_BASE_URL, TMDB_API_KEY, movie_id) => {
-//       const similarMovies = await (
-//         await fetch(`${TMDB_BASE_URL}/${movie_id}/similar`)
-//       ).json();
-
-//       return similarMovies;
-//     },
-
-//     getUpComing: async (TMDB_BASE_URL, TMDB_API_KEY) => {
-//       const upcoming = await (await fetch(`${TMDB_BASE_URL}/upcoming`)).json();
-
-//       return upcoming;
-//     },
-
-//     getTopRated: async (TMDB_BASE_URL, TMDB_API_KEY) => {
-//       const topRated = await (await fetch(`${TMDB_BASE_URL}/top_rated`)).json();
-
-//       return topRated;
-//     },
-
-//     getNowPlaying: async (TMDB_BASE_URL, TMDB_API_KEY) => {
-//       const nowPlaying = await (await fetch(`${TMDB_BASE_URL}/now_playing`)).json();
-
-//       return nowPlaying;
-//     },
-
-//     getLatestMovies: async (TMDB_BASE_URL, TMDB_API_KEY) => {
-//       const latestMovies = await (await fetch(`${TMDB_BASE_URL}/latest`)).json();
-
-//       return latestMovies;
-//     },
-
-//     getTranslations: async (TMDB_BASE_URL, TMDB_API_KEY, movie_id) => {
-//       const translations = await (
-//         await fetch(`${TMDB_BASE_URL}/${movie_id}/translations`)
-//       ).json();
-
-//       return translations;
-//     },
-
-//     getReviews: async (TMDB_BASE_URL, TMDB_API_KEY, movie_id) => {
-//       const reviews = await (
-//         await fetch(`${TMDB_BASE_URL}/${movie_id}/reviews`)
-//       ).json();
-
-//       return reviews;
-//     },
-
-//     getKeywords: async (TMDB_BASE_URL, TMDB_API_KEY, movie_id) => {
-//       const keywords = await (
-//         await fetch(`${TMDB_BASE_URL}/${movie_id}/keywords`)
-//       ).json();
-
-//       return keywords;
-//     },
-
-//     getCredits: async (TMDB_BASE_URL, TMDB_API_KEY, movie_id) => {
-//       const credits = await (
-//         await fetch(`${TMDB_BASE_URL}/${movie_id}/credits`)
-//       ).json();
-
-//       return credits;
-//     },
-//   };
