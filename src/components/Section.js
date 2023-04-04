@@ -6,7 +6,13 @@ import {
   shouldForwardProp,
   Heading,
   Container,
+  Flex,
+  Box,
+  Text,
+  Image,
+  Badge,
 } from "@chakra-ui/react";
+import { ModalItem } from "./item";
 
 const StyledDiv = chakra(motion.div, {
   shouldForwardProp: (prop) => {
@@ -48,6 +54,64 @@ export const SearchSection = ({
       <Heading as="h4" variant="page-title" mb={5} fontFamily={theme.fonts}>
         Found {heading} movies!
       </Heading>
+      {children}
+    </Container>
+  </StyledDiv>
+);
+
+export const ModalSection = ({ children, delay = 0, styles = {}, heading }) => (
+  <StyledDiv
+    initial={{ y: 10, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.8, delay }}
+    mb={6}
+    style={styles}
+  >
+    <Container maxW="container.lg">
+      {children}
+    </Container>
+  </StyledDiv>
+);
+
+export const ModalDetailSection = ({ children, delay = 0, styles = {}, heading }) => (
+  <StyledDiv
+    initial={{ y: 10, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.8, delay }}
+    mb={6}
+    style={styles}
+  >
+    <Container maxW="container.lg">
+      {children}
+    </Container>
+  </StyledDiv>
+);
+
+export const ModalCreditSection = ({ children, delay = 0, styles = {}, heading }) => (
+  <StyledDiv
+    initial={{ y: 10, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.8, delay }}
+    mb={6}
+    style={styles}
+  >
+    <Container maxW="container.lg">
+      Modal Credit Section
+      {children}
+    </Container>
+  </StyledDiv>
+);
+
+export const ModalSimilarMovieSection = ({ children, delay = 0, styles = {}, heading }) => (
+  <StyledDiv
+    initial={{ y: 10, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.8, delay }}
+    mb={6}
+    style={styles}
+  >
+    <Container maxW="container.lg">
+      Modal Similar Movie Section
       {children}
     </Container>
   </StyledDiv>
