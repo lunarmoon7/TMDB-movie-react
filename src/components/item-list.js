@@ -1,10 +1,6 @@
 import React from "react";
-import {
-  Flex,
-  Box,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import { MovieItem, SearchItem } from "./item";
+import { Flex, Box, SimpleGrid } from "@chakra-ui/react";
+import { ModalCreditItem, MovieItem, SearchItem } from "./item";
 import { ApiError } from "./error";
 
 export const MovieList = (props) => {
@@ -62,6 +58,30 @@ export const SearchList = (props) => {
               thumbnail={result.poster_path}
             />
           ))}
+        </SimpleGrid>
+      )}
+    </Box>
+  );
+};
+
+export const CreditList = (props) => {
+  return (
+    <Box>
+      {!props.creditResult && <ApiError />}
+      {props.creditResult && (
+        <SimpleGrid minChildWidth="100px" spacingX="35px" spacingY="20px">
+          {props.creditResult.map(
+            (credit) =>
+              credit.popularity >= 15 && (
+                <ModalCreditItem
+                  key={credit.id}
+                  thumbnail={credit.profile_path}
+                  name={credit.name}
+                  character={credit.character}
+                  popularity={credit.popularity}
+                />
+              )
+          )}
         </SimpleGrid>
       )}
     </Box>
