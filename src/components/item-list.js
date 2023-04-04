@@ -1,17 +1,11 @@
 import React from "react";
 import {
-  Container,
   Flex,
   Box,
   SimpleGrid,
-  useColorModeValue,
-  Heading,
 } from "@chakra-ui/react";
 import { MovieItem, SearchItem } from "./item";
-import { ApiError, ImageError } from "./error";
-import { Detail } from "./Detail";
-
-import theme from "../libs/theme";
+import { ApiError } from "./error";
 
 export const MovieList = (props) => {
   return (
