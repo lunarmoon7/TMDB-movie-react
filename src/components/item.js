@@ -177,7 +177,7 @@ export const ModalDetailItem = (props) => {
 export const ModalCreditItem = (props) => {
   return (
     <Box display="flex" flexDirection="column">
-      <Card minW="130px" textAlign="center" mr={3}>
+      <Card maxW="130px" textAlign="center">
         <CardBody p={0}>
           <LinkBox cursor="pointer">
             <Image
@@ -190,7 +190,7 @@ export const ModalCreditItem = (props) => {
           </LinkBox>
         </CardBody>
       </Card>
-      <Box mt={2}>
+      <Box maxW={'130px'} mt={2}>
         <Text fontFamily={theme.fonts} color="gray.200">
           {props.name}
         </Text>
