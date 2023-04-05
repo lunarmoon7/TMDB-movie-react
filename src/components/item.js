@@ -34,23 +34,50 @@ export const MovieItem = ({
   vote_count,
   popularity,
   thumbnail,
-}) => (
-  // onClick={onOpen}
-  <Card position="relative" minW="150px" textAlign="center" mr={3}>
-    <Movierate vote_average={vote_average} />
-    <CardBody p={0}>
-      <LinkBox cursor="pointer" h="100%">
-        <Image
-          w="100%"
-          objectFit="cover"
-          src={`${TMDB_POSTER_URL}${thumbnail}`}
-          alt={title}
-          borderRadius="lg"
-        />
-      </LinkBox>
-    </CardBody>
-  </Card>
-);
+}) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <Card
+        position="relative"
+        minW="150px"
+        textAlign="center"
+        mr={3}
+        onClick={onOpen}
+      >
+        <Movierate vote_average={vote_average} />
+        <CardBody p={0}>
+          <LinkBox cursor="pointer" h="100%">
+            {thumbnail && (
+              <Image
+                w="100%"
+                objectFit="cover"
+                src={`${TMDB_POSTER_URL}${thumbnail}`}
+                alt={title}
+                borderRadius="lg"
+              />
+            )}
+            {thumbnail === null && <ImageError />}
+          </LinkBox>
+        </CardBody>
+      </Card>
+
+      <MovieModal
+        onClose={onClose}
+        isOpen={isOpen}
+        adult={adult}
+        id={id}
+        title={title}
+        overview={overview}
+        release_date={release_date}
+        vote_average={vote_average}
+        vote_count={vote_count}
+        popularity={popularity}
+        thumbnail={thumbnail}
+      />
+    </>
+  );
+};
 
 export const SearchItem = ({
   adult,
@@ -149,8 +176,8 @@ export const ModalDetailItem = (props) => {
 
 export const ModalCreditItem = (props) => {
   return (
-    <Box display="flex" flexDirection="column" alignItems="baseline">
-      <Card position="relative" minW="140px" textAlign="center" mr={3}>
+    <Box display="flex" flexDirection="column">
+      <Card minW="130px" textAlign="center" mr={3}>
         <CardBody p={0}>
           <LinkBox cursor="pointer">
             <Image
@@ -164,7 +191,12 @@ export const ModalCreditItem = (props) => {
         </CardBody>
       </Card>
       <Box mt={2}>
-        <Text fontFamily={theme.fonts} color='gray.200'>{props.name}</Text>
+        <Text fontFamily={theme.fonts} color="gray.200">
+          {props.name}
+        </Text>
+        <Text fontFamily={theme.fonts} color="gray.400" fontSize={'sm'}>
+          ({props.character})
+        </Text>
       </Box>
     </Box>
   );
