@@ -2,13 +2,15 @@ import React from "react";
 import { Flex, Box, SimpleGrid } from "@chakra-ui/react";
 import { ModalCreditItem, MovieItem, SearchItem } from "./item";
 import { ApiError } from "./error";
+import { Item } from "./item";
 
 export const MovieList = (props) => {
   return (
     <Box>
       {!props.movies && <ApiError />}
       {props.movies && (
-        <Flex
+        <Box
+          display='flex'
           color="black"
           textAlign="center"
           overflowX="auto"
@@ -17,9 +19,10 @@ export const MovieList = (props) => {
               display: "none",
             },
           }}
+          gap="20px"
         >
           {props.movies.map((movie) => (
-            <MovieItem
+            <Item
               key={movie.id}
               adult={movie.adult}
               id={movie.id}
@@ -32,7 +35,7 @@ export const MovieList = (props) => {
               thumbnail={movie.poster_path}
             />
           ))}
-        </Flex>
+        </Box>
       )}
     </Box>
   );
@@ -43,9 +46,9 @@ export const SearchList = (props) => {
     <Box>
       {!props.searchResult && <ApiError />}
       {props.searchResult && (
-        <SimpleGrid minChildWidth="150px" spacingX="40px" spacingY="20px">
+        <Box display="flex" flexWrap="wrap" justifyContent={'center'} gap="20px">
           {props.searchResult.map((result) => (
-            <SearchItem
+            <Item
               key={result.id}
               adult={result.adult}
               id={result.id}
@@ -58,7 +61,7 @@ export const SearchList = (props) => {
               thumbnail={result.poster_path}
             />
           ))}
-        </SimpleGrid>
+        </Box>
       )}
     </Box>
   );
@@ -69,8 +72,8 @@ export const CreditList = (props) => {
     <Box>
       {!props.creditResult && <ApiError />}
       {props.creditResult && (
-        <Box display='flex' flexWrap='wrap' gap='20px'>
-        {/* <SimpleGrid minChildWidth='130px' spacingX="15px" spacingY="20px"> */}
+        <Box display="flex" flexWrap="wrap" gap="20px">
+          {/* <SimpleGrid minChildWidth='130px' spacingX="15px" spacingY="20px"> */}
           {props.creditResult.map(
             (credit) =>
               credit.popularity >= 10 && (
@@ -83,7 +86,7 @@ export const CreditList = (props) => {
                 />
               )
           )}
-        {/* </SimpleGrid> */}
+          {/* </SimpleGrid> */}
         </Box>
       )}
     </Box>
