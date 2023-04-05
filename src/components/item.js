@@ -24,107 +24,140 @@ import theme from "../libs/theme";
 
 const TMDB_POSTER_URL = config.TMDB_POSTER_URL;
 
-export const MovieItem = ({
-  adult,
-  id,
-  title,
-  overview,
-  release_date,
-  vote_average,
-  vote_count,
-  popularity,
-  thumbnail,
-}) => {
+export const Item = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Card
-        position="relative"
-        minW="150px"
-        textAlign="center"
-        mr={3}
-        onClick={onOpen}
-      >
-        <Movierate vote_average={vote_average} />
-        <CardBody p={0}>
+      <Box position="relative" w="150px" minW="150px" textAlign="center" onClick={onOpen}>
+        <Movierate vote_average={props.vote_average} />
+        <Box h='100%'>
           <LinkBox cursor="pointer" h="100%">
-            {thumbnail && (
+            {props.thumbnail && (
               <Image
                 w="100%"
                 objectFit="cover"
-                src={`${TMDB_POSTER_URL}${thumbnail}`}
-                alt={title}
+                src={`${TMDB_POSTER_URL}${props.thumbnail}`}
+                alt={props.title}
                 borderRadius="lg"
               />
             )}
-            {thumbnail === null && <ImageError />}
+            {props.thumbnail === null && <ImageError />}
           </LinkBox>
-        </CardBody>
-      </Card>
-
-      <MovieModal
-        onClose={onClose}
-        isOpen={isOpen}
-        adult={adult}
-        id={id}
-        title={title}
-        overview={overview}
-        release_date={release_date}
-        vote_average={vote_average}
-        vote_count={vote_count}
-        popularity={popularity}
-        thumbnail={thumbnail}
-      />
-    </>
-  );
-};
-
-export const SearchItem = ({
-  adult,
-  id,
-  title,
-  overview,
-  release_date,
-  vote_average,
-  vote_count,
-  popularity,
-  thumbnail,
-}) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  return (
-    <>
-      <Box position="relative" textAlign="center" onClick={onOpen}>
-        <Movierate vote_average={vote_average} />
-        <LinkBox cursor="pointer" h="100%">
-          {thumbnail && (
-            <Image
-              w="100%"
-              objectFit="cover"
-              src={`${TMDB_POSTER_URL}${thumbnail}`}
-              alt={title}
-              borderRadius="lg"
-            />
-          )}
-          {thumbnail === null && <ImageError />}
-        </LinkBox>
+        </Box>
       </Box>
 
       <MovieModal
         onClose={onClose}
         isOpen={isOpen}
-        adult={adult}
-        id={id}
-        title={title}
-        overview={overview}
-        release_date={release_date}
-        vote_average={vote_average}
-        vote_count={vote_count}
-        popularity={popularity}
-        thumbnail={thumbnail}
+        adult={props.adult}
+        id={props.id}
+        title={props.title}
+        overview={props.overview}
+        release_date={props.release_date}
+        vote_average={props.vote_average}
+        vote_count={props.vote_count}
+        popularity={props.popularity}
+        thumbnail={props.thumbnail}
       />
     </>
   );
 };
+
+// export const MovieItem = ({
+//   adult,
+//   id,
+//   title,
+//   overview,
+//   release_date,
+//   vote_average,
+//   vote_count,
+//   popularity,
+//   thumbnail,
+// }) => {
+//   const { isOpen, onOpen, onClose } = useDisclosure();
+//   return (
+//     <>
+//       <Box position="relative" minW="150px" textAlign="center" onClick={onOpen}>
+//         <Movierate vote_average={vote_average} />
+//         <Box>
+//           <LinkBox cursor="pointer" h="100%">
+//             {thumbnail && (
+//               <Image
+//                 w="100%"
+//                 objectFit="cover"
+//                 src={`${TMDB_POSTER_URL}${thumbnail}`}
+//                 alt={title}
+//                 borderRadius="lg"
+//               />
+//             )}
+//             {thumbnail === null && <ImageError />}
+//           </LinkBox>
+//         </Box>
+//       </Box>
+
+//       <MovieModal
+//         onClose={onClose}
+//         isOpen={isOpen}
+//         adult={adult}
+//         id={id}
+//         title={title}
+//         overview={overview}
+//         release_date={release_date}
+//         vote_average={vote_average}
+//         vote_count={vote_count}
+//         popularity={popularity}
+//         thumbnail={thumbnail}
+//       />
+//     </>
+//   );
+// };
+
+// export const SearchItem = ({
+//   adult,
+//   id,
+//   title,
+//   overview,
+//   release_date,
+//   vote_average,
+//   vote_count,
+//   popularity,
+//   thumbnail,
+// }) => {
+//   const { isOpen, onOpen, onClose } = useDisclosure();
+//   return (
+//     <>
+//       <Box position="relative" w="150px" minW="150px" textAlign="center" onClick={onOpen}>
+//         <Movierate vote_average={vote_average} />
+//         <LinkBox cursor="pointer" h="100%">
+//           {thumbnail && (
+//             <Image
+//               w="100%"
+//               objectFit="cover"
+//               src={`${TMDB_POSTER_URL}${thumbnail}`}
+//               alt={title}
+//               borderRadius="lg"
+//             />
+//           )}
+//           {thumbnail === null && <ImageError />}
+//         </LinkBox>
+//       </Box>
+
+//       <MovieModal
+//         onClose={onClose}
+//         isOpen={isOpen}
+//         adult={adult}
+//         id={id}
+//         title={title}
+//         overview={overview}
+//         release_date={release_date}
+//         vote_average={vote_average}
+//         vote_count={vote_count}
+//         popularity={popularity}
+//         thumbnail={thumbnail}
+//       />
+//     </>
+//   );
+// };
 
 export const ModalDetailItem = (props) => {
   return (
@@ -190,11 +223,11 @@ export const ModalCreditItem = (props) => {
           </LinkBox>
         </CardBody>
       </Card>
-      <Box maxW={'130px'} mt={2}>
+      <Box maxW={"130px"} mt={2}>
         <Text fontFamily={theme.fonts} color="gray.200">
           {props.name}
         </Text>
-        <Text fontFamily={theme.fonts} color="gray.400" fontSize={'sm'}>
+        <Text fontFamily={theme.fonts} color="gray.400" fontSize={"sm"}>
           ({props.character})
         </Text>
       </Box>
