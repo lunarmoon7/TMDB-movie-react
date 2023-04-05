@@ -69,10 +69,10 @@ export const CreditList = (props) => {
     <Box>
       {!props.creditResult && <ApiError />}
       {props.creditResult && (
-        <SimpleGrid minChildWidth="100px" spacingX="35px" spacingY="20px">
+        <SimpleGrid minChildWidth='130px' spacingX="15px" spacingY="20px">
           {props.creditResult.map(
             (credit) =>
-              credit.popularity >= 15 && (
+              credit.popularity >= 10 && (
                 <ModalCreditItem
                   key={credit.id}
                   thumbnail={credit.profile_path}
