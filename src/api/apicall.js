@@ -57,7 +57,7 @@ const TMDB = {
     );
     const upcoming = await resp.json();
 
-    return upcoming.results;
+    return upcoming;
   },
 
   getTopRated: async () => {
