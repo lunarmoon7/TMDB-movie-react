@@ -30,16 +30,18 @@ export const MovieModal = (props) => {
   const promiseHandler = (callType, setStateType) => {
     callType.then((data) => {
       setStateType((prev) => {
-        return { ...data };
+        return [ ...data['cast'] ];
       });
     });
+    
   };
 
   useEffect(() => {
     promiseHandler(TMDB.getCredits(props.id), setCredits);
   }, []);
+
   return (
-    <Modal onClose={props.onClose} isOpen={props.isOpen} size="xl">
+    <Modal onClose={props.onClose} size='xl' isOpen={props.isOpen} >
       <ModalOverlay
         bg="blackAlpha.300"
         backdropFilter="auto"
@@ -64,7 +66,7 @@ export const MovieModal = (props) => {
               />
             </ModalDetailSection>
             <ModalCreditSection>
-              <CreditList creditResult={credits['cast']}/>
+              <CreditList creditResult={credits} />
             </ModalCreditSection>
             <ModalSimilarMovieSection />
           </ModalSection>
