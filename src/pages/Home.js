@@ -1,3 +1,6 @@
+// item에서 MovieItem, SearchItem 등 안의 구조 컴포넌트화 시키기
+// 공통되는 부분은 item.js에 넣고, 다른 부분은 각각의 파일에 넣기 (children 이용) 
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -25,10 +28,20 @@ const Home = (props) => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [nowPlaying, setNowPlayingMovies] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [upComing, setUpComingMovies] = useState({
+    dates: {},
+    results: [],
+  });
 
   const promiseHandler = (callType, setStateType) => {
     callType.then((data) => {
-      setStateType(data);
+      if (typeof data === Object) {
+        setStateType((prev) => {
+          return { ...prev, dates: data.dates, results: data.results };
+        });
+      } else {
+        setStateType(data);
+      }
     });
   };
 
@@ -45,6 +58,7 @@ const Home = (props) => {
   useEffect(() => {
     promiseHandler(TMDB.getPopularMovies(), setPopularMovies);
     promiseHandler(TMDB.getNowPlaying(), setNowPlayingMovies);
+    promiseHandler(TMDB.getUpComing(), setUpComingMovies);
   }, []);
   return (
     <ChakraProvider theme={theme}>
@@ -60,6 +74,10 @@ const Home = (props) => {
 
         <Section heading={"Now playing"}>
           <MovieList movies={nowPlaying} />
+        </Section>
+
+        <Section heading={"Upcoming"}>
+          <MovieList movies={upComing['results']} />
         </Section>
       </Container>
     </ChakraProvider>
