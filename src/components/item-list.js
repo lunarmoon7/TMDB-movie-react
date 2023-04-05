@@ -69,7 +69,8 @@ export const CreditList = (props) => {
     <Box>
       {!props.creditResult && <ApiError />}
       {props.creditResult && (
-        <SimpleGrid minChildWidth='130px' spacingX="15px" spacingY="20px">
+        <Box display='flex' flexWrap='wrap' gap='20px'>
+        {/* <SimpleGrid minChildWidth='130px' spacingX="15px" spacingY="20px"> */}
           {props.creditResult.map(
             (credit) =>
               credit.popularity >= 10 && (
@@ -82,7 +83,8 @@ export const CreditList = (props) => {
                 />
               )
           )}
-        </SimpleGrid>
+        {/* </SimpleGrid> */}
+        </Box>
       )}
     </Box>
   );
