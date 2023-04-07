@@ -57,6 +57,7 @@ export const MovieModal = (props) => {
                 adult={props.adult}
                 id={props.id}
                 title={props.title}
+                genres={props.genres}
                 overview={props.overview}
                 release_date={props.release_date}
                 vote_average={props.vote_average}

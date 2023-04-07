@@ -21,6 +21,8 @@ import Movierate from "./Movierate";
 import { ImageError } from "./error";
 import { MovieModal } from "./Modal";
 import theme from "../libs/theme";
+import { UpcomingDate } from "./upcomingDate";
+import { Genre } from './Genre';
 
 const TMDB_POSTER_URL = config.TMDB_POSTER_URL;
 
@@ -29,6 +31,9 @@ export const Item = (props) => {
   return (
     <>
       <Box position="relative" w="150px" minW="150px" textAlign="center" onClick={onOpen}>
+        {/* {props.maxinum && props.minimum && (
+          <UpcomingDate maximum={props.maximum} minimum={props.minimum}/>
+        )} */}
         <Movierate vote_average={props.vote_average} />
         <Box h='100%'>
           <LinkBox cursor="pointer" h="100%">
@@ -52,6 +57,7 @@ export const Item = (props) => {
         adult={props.adult}
         id={props.id}
         title={props.title}
+        genres={props.genres}
         overview={props.overview}
         release_date={props.release_date}
         vote_average={props.vote_average}
@@ -62,102 +68,6 @@ export const Item = (props) => {
     </>
   );
 };
-
-// export const MovieItem = ({
-//   adult,
-//   id,
-//   title,
-//   overview,
-//   release_date,
-//   vote_average,
-//   vote_count,
-//   popularity,
-//   thumbnail,
-// }) => {
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-//   return (
-//     <>
-//       <Box position="relative" minW="150px" textAlign="center" onClick={onOpen}>
-//         <Movierate vote_average={vote_average} />
-//         <Box>
-//           <LinkBox cursor="pointer" h="100%">
-//             {thumbnail && (
-//               <Image
-//                 w="100%"
-//                 objectFit="cover"
-//                 src={`${TMDB_POSTER_URL}${thumbnail}`}
-//                 alt={title}
-//                 borderRadius="lg"
-//               />
-//             )}
-//             {thumbnail === null && <ImageError />}
-//           </LinkBox>
-//         </Box>
-//       </Box>
-
-//       <MovieModal
-//         onClose={onClose}
-//         isOpen={isOpen}
-//         adult={adult}
-//         id={id}
-//         title={title}
-//         overview={overview}
-//         release_date={release_date}
-//         vote_average={vote_average}
-//         vote_count={vote_count}
-//         popularity={popularity}
-//         thumbnail={thumbnail}
-//       />
-//     </>
-//   );
-// };
-
-// export const SearchItem = ({
-//   adult,
-//   id,
-//   title,
-//   overview,
-//   release_date,
-//   vote_average,
-//   vote_count,
-//   popularity,
-//   thumbnail,
-// }) => {
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-//   return (
-//     <>
-//       <Box position="relative" w="150px" minW="150px" textAlign="center" onClick={onOpen}>
-//         <Movierate vote_average={vote_average} />
-//         <LinkBox cursor="pointer" h="100%">
-//           {thumbnail && (
-//             <Image
-//               w="100%"
-//               objectFit="cover"
-//               src={`${TMDB_POSTER_URL}${thumbnail}`}
-//               alt={title}
-//               borderRadius="lg"
-//             />
-//           )}
-//           {thumbnail === null && <ImageError />}
-//         </LinkBox>
-//       </Box>
-
-//       <MovieModal
-//         onClose={onClose}
-//         isOpen={isOpen}
-//         adult={adult}
-//         id={id}
-//         title={title}
-//         overview={overview}
-//         release_date={release_date}
-//         vote_average={vote_average}
-//         vote_count={vote_count}
-//         popularity={popularity}
-//         thumbnail={thumbnail}
-//       />
-//     </>
-//   );
-// };
 
 export const ModalDetailItem = (props) => {
   return (
@@ -184,6 +94,11 @@ export const ModalDetailItem = (props) => {
               </Box>
             </Flex>
           </Flex>
+          <Box display='flex' flexWrap={'wrap'} gap='5px' mb={5}>
+            {props.genres.map((genre) => (
+              <Genre key={genre} id={genre}/>
+            ))}
+          </Box>
           <Badge borderRadius="full" px="2" colorScheme="teal" mb={3}>
             {props.adult ? "Adult" : "ALL"}
           </Badge>

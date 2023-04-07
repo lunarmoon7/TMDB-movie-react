@@ -27,12 +27,15 @@ export const MovieList = (props) => {
               adult={movie.adult}
               id={movie.id}
               title={movie.title}
+              genres={movie.genre_ids}
               overview={movie.overview}
               release_date={movie.release_date}
               vote_average={movie.vote_average}
               vote_count={movie.vote_count}
               popularity={movie.popularity}
               thumbnail={movie.poster_path}
+              // maximum={props.maximum ? props.maximum : null}
+              // minimum={props.minimum ? props.minimum : null}
             />
           ))}
         </Box>
@@ -46,13 +49,14 @@ export const SearchList = (props) => {
     <Box>
       {!props.searchResult && <ApiError />}
       {props.searchResult && (
-        <Box display="flex" flexWrap="wrap" justifyContent={'center'} gap="20px">
+        <Box display="flex" flexWrap="wrap" gap="20px">
           {props.searchResult.map((result) => (
             <Item
               key={result.id}
               adult={result.adult}
               id={result.id}
               title={result.title}
+              genres={result.genre_ids}
               overview={result.overview}
               release_date={result.release_date}
               vote_average={result.vote_average}
