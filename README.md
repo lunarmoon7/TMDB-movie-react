@@ -11,4 +11,5 @@
 - Research on Search-page ( ~2023.03.27)
 - Modal showing movie's detail when you click movie component ( ~2023.04.03)
 - Show selected movie's credits on Modal ( ~2023.04.04)
+- Show selected movie's similar movies on Modal ( ~2023.04.07)
 ## 실행화면
