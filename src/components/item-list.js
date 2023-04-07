@@ -1,6 +1,11 @@
 import React from "react";
 import { Flex, Box, SimpleGrid } from "@chakra-ui/react";
-import { ModalCreditItem, MovieItem, SearchItem } from "./item";
+import {
+  ModalCreditItem,
+  ModalSimilarMovieItem,
+  MovieItem,
+  SearchItem,
+} from "./item";
 import { ApiError } from "./error";
 import { Item } from "./item";
 
@@ -10,7 +15,7 @@ export const MovieList = (props) => {
       {!props.movies && <ApiError />}
       {props.movies && (
         <Box
-          display='flex'
+          display="flex"
           color="black"
           textAlign="center"
           overflowX="auto"
@@ -91,6 +96,33 @@ export const CreditList = (props) => {
               )
           )}
           {/* </SimpleGrid> */}
+        </Box>
+      )}
+    </Box>
+  );
+};
+
+export const SimilarList = (props) => {
+  return (
+    <Box>
+      {!props.similarMovies && <ApiError />}
+      {props.similarMovies && (
+        <Box display="flex" flexWrap="wrap" gap="20px">
+          {props.similarMovies.map((movie) => (
+            <ModalSimilarMovieItem
+              key={movie.id}
+              adult={movie.adult}
+              id={movie.id}
+              title={movie.title}
+              genres={movie.genre_ids}
+              overview={movie.overview}
+              release_date={movie.release_date}
+              vote_average={movie.vote_average}
+              vote_count={movie.vote_count}
+              popularity={movie.popularity}
+              thumbnail={movie.poster_path}
+            />
+          ))}
         </Box>
       )}
     </Box>

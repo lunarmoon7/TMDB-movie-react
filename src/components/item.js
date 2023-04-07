@@ -22,7 +22,7 @@ import { ImageError } from "./error";
 import { MovieModal } from "./Modal";
 import theme from "../libs/theme";
 import { UpcomingDate } from "./upcomingDate";
-import { Genre } from './Genre';
+import { Genre } from "./Genre";
 
 const TMDB_POSTER_URL = config.TMDB_POSTER_URL;
 
@@ -30,12 +30,18 @@ export const Item = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box position="relative" w="150px" minW="150px" textAlign="center" onClick={onOpen}>
+      <Box
+        position="relative"
+        w="150px"
+        minW="150px"
+        textAlign="center"
+        onClick={onOpen}
+      >
         {/* {props.maxinum && props.minimum && (
           <UpcomingDate maximum={props.maximum} minimum={props.minimum}/>
         )} */}
         <Movierate vote_average={props.vote_average} />
-        <Box h='100%'>
+        <Box h="100%">
           <LinkBox cursor="pointer" h="100%">
             {props.thumbnail && (
               <Image
@@ -94,9 +100,9 @@ export const ModalDetailItem = (props) => {
               </Box>
             </Flex>
           </Flex>
-          <Box display='flex' flexWrap={'wrap'} gap='5px' mb={5}>
+          <Box display="flex" flexWrap={"wrap"} gap="5px" mb={5}>
             {props.genres.map((genre) => (
-              <Genre key={genre} id={genre}/>
+              <Genre key={genre} id={genre} />
             ))}
           </Box>
           <Badge borderRadius="full" px="2" colorScheme="teal" mb={3}>
@@ -125,8 +131,8 @@ export const ModalDetailItem = (props) => {
 export const ModalCreditItem = (props) => {
   return (
     <Box display="flex" flexDirection="column">
-      <Card maxW="130px" textAlign="center">
-        <CardBody p={0}>
+      <Box maxW="130px" textAlign="center">
+        {/* <CardBody p={0}> */}
           <LinkBox cursor="pointer">
             <Image
               w="100%"
@@ -136,8 +142,8 @@ export const ModalCreditItem = (props) => {
               borderRadius="lg"
             />
           </LinkBox>
-        </CardBody>
-      </Card>
+        {/* </CardBody> */}
+      </Box>
       <Box maxW={"130px"} mt={2}>
         <Text fontFamily={theme.fonts} color="gray.200">
           {props.name}
@@ -151,5 +157,47 @@ export const ModalCreditItem = (props) => {
 };
 
 export const ModalSimilarMovieItem = (props) => {
-  return <Box></Box>;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    <>
+    <Box
+      position="relative"
+      w="150px"
+      minW="150px"
+      textAlign="center"
+      onClick={onOpen}
+    >
+      <Movierate vote_average={props.vote_average} />
+      <Box maxW='150px' h="100%">
+        <LinkBox cursor="pointer" h="100%">
+          {props.thumbnail && (
+            <Image
+              w="100%"
+              objectFit="cover"
+              src={`${TMDB_POSTER_URL}${props.thumbnail}`}
+              alt={props.title}
+              borderRadius="lg"
+            />
+          )}
+          {props.thumbnail === null && <ImageError />}
+        </LinkBox>
+      </Box>
+    </Box>
+    <MovieModal
+        onClose={onClose}
+        isOpen={isOpen}
+        adult={props.adult}
+        id={props.id}
+        title={props.title}
+        genres={props.genres}
+        overview={props.overview}
+        release_date={props.release_date}
+        vote_average={props.vote_average}
+        vote_count={props.vote_count}
+        popularity={props.popularity}
+        thumbnail={props.thumbnail}
+      />
+    </>
+  );
 };

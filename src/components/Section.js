@@ -96,7 +96,7 @@ export const ModalCreditSection = ({ children, delay = 0, styles = {}, heading }
     style={styles}
   >
     <Container maxW="container.lg">
-      <Heading fontFamily={theme.fonts} fontSize='3xl' mb={3}>Credits</Heading>
+      <Heading fontFamily={theme.fonts} fontSize='3xl' mb={3}>{heading}</Heading>
       {children}
     </Container>
   </StyledDiv>
@@ -111,7 +111,7 @@ export const ModalSimilarMovieSection = ({ children, delay = 0, styles = {}, hea
     style={styles}
   >
     <Container maxW="container.lg">
-      Modal Similar Movie Section
+      <Heading fontFamily={theme.fonts} fontSize='3xl' mb={3}>{heading}</Heading>
       {children}
     </Container>
   </StyledDiv>

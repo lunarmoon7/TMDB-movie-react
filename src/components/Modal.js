@@ -17,7 +17,7 @@ import {
   ModalSection,
   ModalSimilarMovieSection,
 } from "./Section";
-import { CreditList } from "./item-list";
+import { CreditList, SimilarList } from "./item-list";
 
 import TMDB from "../api/apicall";
 import config from "../api/apikey";
@@ -26,18 +26,27 @@ const TMDB_POSTER_URL = config.TMDB_POSTER_URL;
 
 export const MovieModal = (props) => {
   const [credits, setCredits] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]);
 
   const promiseHandler = (callType, setStateType) => {
     callType.then((data) => {
-      setStateType((prev) => {
-        return [ ...data['cast'] ];
-      });
+      if (setStateType === setCredits) {
+        setStateType((prev) => {
+          return [ ...data['cast'] ];
+        });
+      } else if (setStateType === setSimilarMovies) {
+        setStateType((prev) => {
+          return [ ...data ];
+        });
+      }
     });
     
   };
 
   useEffect(() => {
     promiseHandler(TMDB.getCredits(props.id), setCredits);
+    promiseHandler(TMDB.getSimilarMovies(props.id), setSimilarMovies);
+    // console.log(similarMovies);
   }, []);
 
   return (
@@ -66,10 +75,12 @@ export const MovieModal = (props) => {
                 thumbnail={props.thumbnail}
               />
             </ModalDetailSection>
-            <ModalCreditSection>
+            <ModalCreditSection heading={"Credits"}>
               <CreditList creditResult={credits} />
             </ModalCreditSection>
-            <ModalSimilarMovieSection />
+            <ModalSimilarMovieSection heading={"Similar Movies"}>
+              <SimilarList similarMovies={similarMovies} />
+            </ModalSimilarMovieSection>
           </ModalSection>
         </ModalBody>
         <ModalFooter>
