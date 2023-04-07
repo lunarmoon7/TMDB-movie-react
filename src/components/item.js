@@ -14,6 +14,7 @@ import {
   Heading,
   Badge,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { Global } from "@emotion/react";
 import TMDB from "../api/apicall";
 import config from "../api/apikey";
@@ -23,11 +24,13 @@ import { MovieModal } from "./Modal";
 import theme from "../libs/theme";
 import { UpcomingDate } from "./upcomingDate";
 import { Genre } from "./Genre";
+import { Hover } from "./Hover";
 
 const TMDB_POSTER_URL = config.TMDB_POSTER_URL;
 
 export const Item = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [onHover, setOnHover] = useState(false);
   return (
     <>
       <Box
@@ -36,6 +39,13 @@ export const Item = (props) => {
         minW="150px"
         textAlign="center"
         onClick={onOpen}
+        overflowY="hidden"
+        onMouseEnter={() => {
+          setOnHover((prev) => !prev);
+        }}
+        onMouseLeave={() => {
+          setOnHover((prev) => !prev);
+        }}
       >
         {/* {props.maxinum && props.minimum && (
           <UpcomingDate maximum={props.maximum} minimum={props.minimum}/>
@@ -55,6 +65,7 @@ export const Item = (props) => {
             {props.thumbnail === null && <ImageError />}
           </LinkBox>
         </Box>
+        <Hover title={props.title} onHover={onHover} />
       </Box>
 
       <MovieModal
@@ -133,15 +144,15 @@ export const ModalCreditItem = (props) => {
     <Box display="flex" flexDirection="column">
       <Box maxW="130px" textAlign="center">
         {/* <CardBody p={0}> */}
-          <LinkBox cursor="pointer">
-            <Image
-              w="100%"
-              objectFit="cover"
-              src={`${TMDB_POSTER_URL}${props.thumbnail}`}
-              alt={props.name}
-              borderRadius="lg"
-            />
-          </LinkBox>
+        <LinkBox cursor="pointer">
+          <Image
+            w="100%"
+            objectFit="cover"
+            src={`${TMDB_POSTER_URL}${props.thumbnail}`}
+            alt={props.name}
+            borderRadius="lg"
+          />
+        </LinkBox>
         {/* </CardBody> */}
       </Box>
       <Box maxW={"130px"} mt={2}>
@@ -158,33 +169,41 @@ export const ModalCreditItem = (props) => {
 
 export const ModalSimilarMovieItem = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const [onHover, setOnHover] = useState(false);
   return (
     <>
-    <Box
-      position="relative"
-      w="150px"
-      minW="150px"
-      textAlign="center"
-      onClick={onOpen}
-    >
-      <Movierate vote_average={props.vote_average} />
-      <Box maxW='150px' h="100%">
-        <LinkBox cursor="pointer" h="100%">
-          {props.thumbnail && (
-            <Image
-              w="100%"
-              objectFit="cover"
-              src={`${TMDB_POSTER_URL}${props.thumbnail}`}
-              alt={props.title}
-              borderRadius="lg"
-            />
-          )}
-          {props.thumbnail === null && <ImageError />}
-        </LinkBox>
+      <Box
+        position="relative"
+        w="150px"
+        minW="150px"
+        textAlign="center"
+        onClick={onOpen}
+        overflowY="hidden"
+        onMouseEnter={() => {
+          setOnHover((prev) => !prev);
+        }}
+        onMouseLeave={() => {
+          setOnHover((prev) => !prev);
+        }}
+      >
+        <Movierate vote_average={props.vote_average} />
+        <Box maxW="150px" h="100%">
+          <LinkBox cursor="pointer" h="100%">
+            {props.thumbnail && (
+              <Image
+                w="100%"
+                objectFit="cover"
+                src={`${TMDB_POSTER_URL}${props.thumbnail}`}
+                alt={props.title}
+                borderRadius="lg"
+              />
+            )}
+            {props.thumbnail === null && <ImageError />}
+          </LinkBox>
+        </Box>
+        <Hover title={props.title} onHover={onHover} />
       </Box>
-    </Box>
-    <MovieModal
+      <MovieModal
         onClose={onClose}
         isOpen={isOpen}
         adult={props.adult}
