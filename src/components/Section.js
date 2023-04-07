@@ -67,13 +67,33 @@ export const ModalSection = ({ children, delay = 0, styles = {}, heading }) => (
     mb={6}
     style={styles}
   >
-    <Container maxW="container.lg">
-      {children}
-    </Container>
+    <Container maxW="container.lg">{children}</Container>
   </StyledDiv>
 );
 
-export const ModalDetailSection = ({ children, delay = 0, styles = {}, heading }) => (
+export const ModalDetailSection = ({
+  children,
+  delay = 0,
+  styles = {},
+  heading,
+}) => (
+  <StyledDiv
+    initial={{ y: 10, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.8, delay }}
+    mb={6}
+    style={styles}
+  >
+    <Container maxW="container.lg">{children}</Container>
+  </StyledDiv>
+);
+
+export const ModalCreditSection = ({
+  children,
+  delay = 0,
+  styles = {},
+  heading,
+}) => (
   <StyledDiv
     initial={{ y: 10, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
@@ -82,12 +102,20 @@ export const ModalDetailSection = ({ children, delay = 0, styles = {}, heading }
     style={styles}
   >
     <Container maxW="container.lg">
+      <Heading fontFamily={theme.fonts} fontSize="3xl" mb={3}>
+        {heading}
+      </Heading>
       {children}
     </Container>
   </StyledDiv>
 );
 
-export const ModalCreditSection = ({ children, delay = 0, styles = {}, heading }) => (
+export const ModalSimilarMovieSection = ({
+  children,
+  delay = 0,
+  styles = {},
+  heading,
+}) => (
   <StyledDiv
     initial={{ y: 10, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
@@ -96,22 +124,9 @@ export const ModalCreditSection = ({ children, delay = 0, styles = {}, heading }
     style={styles}
   >
     <Container maxW="container.lg">
-      <Heading fontFamily={theme.fonts} fontSize='3xl' mb={3}>{heading}</Heading>
-      {children}
-    </Container>
-  </StyledDiv>
-);
-
-export const ModalSimilarMovieSection = ({ children, delay = 0, styles = {}, heading }) => (
-  <StyledDiv
-    initial={{ y: 10, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.8, delay }}
-    mb={6}
-    style={styles}
-  >
-    <Container maxW="container.lg">
-      <Heading fontFamily={theme.fonts} fontSize='3xl' mb={3}>{heading}</Heading>
+      <Heading fontFamily={theme.fonts} fontSize="3xl" mb={3}>
+        {heading}
+      </Heading>
       {children}
     </Container>
   </StyledDiv>
