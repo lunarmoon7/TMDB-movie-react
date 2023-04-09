@@ -12,7 +12,7 @@
 - Modal showing movie's detail when you click movie component ( ~2023.04.03)
 - Show selected movie's credits on Modal ( ~2023.04.04)
 - Show selected movie's similar movies on Modal ( ~2023.04.07)
-## Prototype
+## Demo
 ### Main Page
 ![Apr-09-2023 12-44-20](https://user-images.githubusercontent.com/101445377/230753054-83644a3f-4594-4d2b-913e-c4f9b2eb7473.gif)
 
