@@ -14,7 +14,9 @@
 - Show selected movie's similar movies on Modal ( ~2023.04.07)
 ## 실행화면
 ### Main Page
-![movie-react-main](https://user-images.githubusercontent.com/101445377/230752948-ef1f8756-806c-40da-a3f3-7320f4737b83.gif)
+![Apr-09-2023 12-44-20](https://user-images.githubusercontent.com/101445377/230753054-83644a3f-4594-4d2b-913e-c4f9b2eb7473.gif)
+
+<!-- ![movie-react-main](https://user-images.githubusercontent.com/101445377/230752948-ef1f8756-806c-40da-a3f3-7320f4737b83.gif) -->
 
 ### Movie's detail in Modal - (You can see Credits, Overviews, Release date, Genres, etc.)
 ![movie-react-modal](https://user-images.githubusercontent.com/101445377/230752972-3fe10427-0b6c-4ea5-a5ab-bcb8a5fa6041.gif)
