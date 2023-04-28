@@ -11,8 +11,8 @@ const TMDB = {
       `${TMDB_BASE_URL}/popular?api_key=${TMDB_API_KEY}`
     );
     const popularMovies = await resp.json();
-    
-    return popularMovies.results;
+
+    return popularMovies;
   },
 
   getDetails: async (movie_id) => {
@@ -73,7 +73,7 @@ const TMDB = {
       `${TMDB_BASE_URL}/now_playing?api_key=${TMDB_API_KEY}`
     );
     const nowPlaying = await resp.json();
-    return nowPlaying.results;
+    return nowPlaying;
   },
 
   getLatestMovies: async () => {
@@ -128,6 +128,5 @@ const TMDB = {
     return searches.results;
   },
 };
-
 
 export default TMDB;
