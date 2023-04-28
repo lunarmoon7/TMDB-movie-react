@@ -12,7 +12,7 @@ import {
   Image,
   Badge,
 } from "@chakra-ui/react";
-import { ModalItem } from "./item";
+import { ModalItem } from "./UI/item";
 
 const StyledDiv = chakra(motion.div, {
   shouldForwardProp: (prop) => {

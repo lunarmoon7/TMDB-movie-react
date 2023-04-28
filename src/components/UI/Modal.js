@@ -16,11 +16,11 @@ import {
   ModalDetailSection,
   ModalSection,
   ModalSimilarMovieSection,
-} from "./Section";
-import { CreditList, SimilarList } from "./item-list";
+} from "../Section";
+import { CreditList, SimilarList } from "../UI/item-list";
 
-import TMDB from "../api/apicall";
-import config from "../api/apikey";
+import TMDB from "../../api/apicall";
+import config from "../../api/apikey";
 
 const TMDB_POSTER_URL = config.TMDB_POSTER_URL;
 
@@ -32,15 +32,14 @@ export const MovieModal = (props) => {
     callType.then((data) => {
       if (setStateType === setCredits) {
         setStateType((prev) => {
-          return [ ...data['cast'] ];
+          return [...data["cast"]];
         });
       } else if (setStateType === setSimilarMovies) {
         setStateType((prev) => {
-          return [ ...data ];
+          return [...data];
         });
       }
     });
-    
   };
 
   useEffect(() => {
@@ -50,7 +49,7 @@ export const MovieModal = (props) => {
   }, []);
 
   return (
-    <Modal onClose={props.onClose} size='xl' isOpen={props.isOpen} >
+    <Modal onClose={props.onClose} size="xl" isOpen={props.isOpen}>
       <ModalOverlay
         bg="blackAlpha.300"
         backdropFilter="auto"

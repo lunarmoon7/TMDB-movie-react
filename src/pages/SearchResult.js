@@ -3,10 +3,10 @@ import { Box, Text, ChakraProvider, Container } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import TMDB from "../api/apicall";
 import { SearchSection } from "../components/Section";
-import { SearchList } from "../components/item-list";
+import { SearchList } from "../components/UI/item-list";
 import theme from "../libs/theme";
-import Navbar from "../components/navbar";
-import Searchbar from "../components/Searchbar";
+import Navbar from "../components/UI/navbar";
+import Searchbar from "../components/UI/Searchbar";
 
 const SearchResult = (props) => {
   const navigate = useNavigate();
