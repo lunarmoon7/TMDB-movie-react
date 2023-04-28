@@ -1,49 +1,24 @@
 // item에서 MovieItem, SearchItem 등 안의 구조 컴포넌트화 시키기
-// 공통되는 부분은 item.js에 넣고, 다른 부분은 각각의 파일에 넣기 (children 이용) 
+// 공통되는 부분은 item.js에 넣고, 다른 부분은 각각의 파일에 넣기 (children 이용)
 
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Center,
-  Text,
   ChakraProvider,
-  Box,
-  Flex,
   Container,
-  Heading,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import theme from "../libs/theme";
-import ThemeToggleButton from "../components/theme-toggle-button";
-import TMDB from "../api/apicall";
-import { MovieItem } from "../components/item";
-import { MovieList } from "../components/item-list";
-import Navbar from "../components/navbar";
+import { MovieList } from "../components/UI/item-list";
+import Navbar from "../components/UI/navbar";
 import { Section } from "../components/Section";
-import Searchbar from "../components/Searchbar";
+import Searchbar from "../components/UI/Searchbar";
+import MovieContext from "../store/movie-context";
 
 const Home = (props) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [popularMovies, setPopularMovies] = useState([]);
-  const [nowPlaying, setNowPlayingMovies] = useState([]);
-  const [inputText, setInputText] = useState("");
-  const [upComing, setUpComingMovies] = useState({
-    dates: {},
-    results: [],
-  });
 
-  const promiseHandler = (callType, setStateType) => {
-    callType.then((data) => {
-      if (typeof data === Object) {
-        setStateType((prev) => {
-          return { ...prev, dates: data.dates, results: data.results };
-        });
-      } else {
-        setStateType(data);
-      }
-    });
-  };
+  const movieCtx = useContext(MovieContext);
 
   const searchHandler = (enteredKeyword, enteredKeyCode) => {
     if (enteredKeyword.trim().length !== 0 && enteredKeyCode === 13) {
@@ -53,13 +28,9 @@ const Home = (props) => {
 
   const routePageHandler = (enteredKeyword) => {
     navigate(`/search/${enteredKeyword}`);
+    navigate(0);
   };
 
-  useEffect(() => {
-    promiseHandler(TMDB.getPopularMovies(), setPopularMovies);
-    promiseHandler(TMDB.getNowPlaying(), setNowPlayingMovies);
-    promiseHandler(TMDB.getUpComing(), setUpComingMovies);
-  }, []);
   return (
     <ChakraProvider theme={theme}>
       <Navbar />
@@ -69,15 +40,15 @@ const Home = (props) => {
         </Container>
 
         <Section heading={"Popular"}>
-          <MovieList movies={popularMovies} />
+          <MovieList movies={movieCtx.popularMovies} />
         </Section>
 
         <Section heading={"Now playing"}>
-          <MovieList movies={nowPlaying} />
+          <MovieList movies={movieCtx.nowPlaying} />
         </Section>
 
         <Section heading={"Upcoming"}>
-          <MovieList movies={upComing['results']} />
+          <MovieList movies={movieCtx.upComing} />
         </Section>
       </Container>
     </ChakraProvider>
